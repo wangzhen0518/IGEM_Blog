@@ -150,7 +150,6 @@ if os.getcwd() == '/app':
     DATABASES = {
         'default':dj_database_url.config(default='postgres://localhost')
     }
-    STATICFILES_DIRS = 'staticfiles'
 
     # 支持所有的主机头 (host header)
     ALLOWED_HOSTS = ['*']
