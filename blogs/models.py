@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class BlogPost(models.Model):
+class blogpost(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)

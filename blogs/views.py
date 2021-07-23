@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import BlogPost
-from .forms import BlogForm
+from .models import blogpost
+from .forms import blogform
 
 
 # Create your views here.
@@ -19,14 +19,14 @@ def check_blog_owner(request, blog):
 
 @login_required
 def blogs(request):
-    blogs = BlogPost.objects.filter(owner=request.user).order_by('date_added')
+    blogs = blogpost.objects.filter(owner=request.user).order_by('date_added')
     context = {'blogs': blogs}
     return render(request, 'blogs/blogs.html', context)
 
 
 @login_required
 def blog(request, blog_id):
-    blog = BlogPost.objects.get(id=blog_id)
+    blog = blogpost.objects.get(id=blog_id)
     check_blog_owner(request, blog)
     context = {'blog': blog}
     return render(request, 'blogs/blog.html', context)
@@ -49,7 +49,7 @@ def new_blog(request):
 
 @login_required
 def edit_blog(request, blog_id):
-    blog = BlogPost.objects.get(id=blog_id)
+    blog = blogpost.objects.get(id=blog_id)
     check_blog_owner(request, blog)
     if request.method != 'POST':
         form = BlogForm(instance=blog)
@@ -64,7 +64,7 @@ def edit_blog(request, blog_id):
 
 @login_required
 def delete_blog(request, blog_id):
-    blog = BlogPost.objects.get(id=blog_id)
+    blog = blogpost.objects.get(id=blog_id)
     check_blog_owner(request, blog)
     blog.delete()
     return HttpResponseRedirect(reverse('blogs:blogs'))
