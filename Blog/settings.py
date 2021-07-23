@@ -143,9 +143,14 @@ BOOSTSTRAP3 = {
 # settings of Heroku
 if os.getcwd() == '/app':
     import django_heroku
+    import dj_database_url
 
     # 让request.is_secure()承认X-Forwarded-Proto头
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    DATABASES = {
+        'default':dj_database_url.config(default='postgres://localhost')
+    }
+    STATICFILES_DIRS = 'staticfiles'
 
     # 支持所有的主机头 (host header)
     ALLOWED_HOSTS = ['*']
