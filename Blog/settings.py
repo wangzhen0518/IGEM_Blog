@@ -141,7 +141,6 @@ BOOSTSTRAP3 = {
 
 # settings of Heroku
 if os.getcwd() == '/app':
-    import dj_database_url
     import django_heroku
 
     # 让request.is_secure()承认X-Forwarded-Proto头
