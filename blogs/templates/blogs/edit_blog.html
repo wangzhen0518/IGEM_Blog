@@ -1,0 +1,25 @@
+{% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h1><a href="{% url 'blogs:blog' blog.id %}">{{ blog.title }}</a></h1>
+
+{% endblock header %}
+
+{% block content %}
+
+<h2>Edit an blog:</h2>
+
+<form action="{% url 'blogs:edit_blog' blog.id %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">Save</button> 
+    {% endbuttons %}
+    
+</form>
+<hr/>
+<h3><a href="{% url 'blogs:blog' blog.id %}">Back to {{ blog.title }}</a></h3>
+
+{% endblock content %}

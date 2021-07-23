@@ -1,0 +1,30 @@
+{% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h1>{{ blog.title }}</h1>
+{% endblock header %}
+
+{% block content %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            {{ blog.date_added|date:'M d, Y H:i' }} <br/>
+            <small>
+                <a href="{% url 'blogs:edit_blog' blog.id %}">edit blog</a> |
+                <a href="{% url 'blogs:delete_blog' blog.id %}">delete blog</a> 
+            </small>
+        </h3>
+    </div>
+    <div class="panel-body">
+        {{ blog.text|linebreaks }}
+    </div>
+</div><!-- panel -->
+<hr />
+<h3>
+    <a href="{% url 'blogs:blogs' %}">Back to blogs</a> |
+    <a href="{% url 'blogs:new_blog' %}">Create a new blog</a>
+</h3>
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "blogs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h1>Blogs</h1>
+{% endblock header %}
+
+{% block content %}
+
+<ul>
+    {% for blog in blogs %}
+    <li>
+        <h3>
+            <a href="{% url 'blogs:blog' blog.id %}">{{ blog.title }}</a>
+        </h3>
+        <p>{{ blog.date_added|date:'M d, Y H:i' }}</p>
+    </li>
+    {% empty %}
+    <li>No topics have been added yet.</li>
+    {% endfor %}
+</ul>
+
+<hr/>
+<h3><a href="{% url 'blogs:new_blog' %}">Create a new blog</a></h3>
+
+{% endblock content %}
