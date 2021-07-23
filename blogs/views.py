@@ -35,11 +35,11 @@ def blog(request, blog_id):
 @login_required
 def new_blog(request):
     if request.method != 'POST':
-        form = BlogForm
+        form = blogform
         context = {'form': form}
         return render(request, 'blogs/new_blog.html', context)
     else:
-        form = BlogForm(request.POST)
+        form = blogform(request.POST)
         if form.is_valid():
             new_blog = form.save(commit=False)
             new_blog.owner = request.user
@@ -52,11 +52,11 @@ def edit_blog(request, blog_id):
     blog = blogpost.objects.get(id=blog_id)
     check_blog_owner(request, blog)
     if request.method != 'POST':
-        form = BlogForm(instance=blog)
+        form = blogform(instance=blog)
         context = {'blog': blog, 'form': form}
         return render(request, 'blogs/edit_blog.html', context)
     else:
-        form = BlogForm(instance=blog, data=request.POST)
+        form = blogform(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('blogs:blogs'))
