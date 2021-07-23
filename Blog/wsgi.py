@@ -11,12 +11,5 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.getcwd() == '/app':
-    from dj_static import Cling
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Blog.settings')
-
-if os.getcwd() == '/app':
-    application = Cling(get_wsgi_application())
-else:
-    application = get_wsgi_application()
+application = get_wsgi_application()
